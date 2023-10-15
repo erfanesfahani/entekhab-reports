@@ -1,4 +1,4 @@
-// import "./globals.css";
+import "../assets/styles/main.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ConfigProvider } from "antd";
@@ -19,8 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.png" sizes="any" />
+      </head>
       <body className={inter.className}>
-        <ConfigProvider theme={theme}>
+        <ConfigProvider theme={theme} direction="rtl">
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </ConfigProvider>
       </body>

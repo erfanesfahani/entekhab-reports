@@ -1,0 +1,11 @@
+html {
+    direction: rtl;
+    body {
+        font-family: "Shabnam";
+        a {
+            font-family: "Shabnam";
+        }
+    }
+}
+@import "./fonts.scss";
+@import "~bootstrap/scss/bootstrap.scss";
