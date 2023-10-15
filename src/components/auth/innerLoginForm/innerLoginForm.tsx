@@ -1,11 +1,13 @@
 "use client";
+
 import * as yup from "yup";
 import { Button, Form, Input } from "antd";
 import User from "@/models/user";
 import "./styles.scss";
+import callApi from "@/helpers/callApi";
 
 const LoginFormValidationSchema = yup.object().shape({
-  user: yup.string().required("وارد کردن نام کاربری الزامی است"),
+  username: yup.string().required("وارد کردن نام کاربری الزامی است"),
   password: yup.string().required("وارد کردن گذر واژه الزامی است"),
 });
 const yupSync = {
@@ -13,17 +15,25 @@ const yupSync = {
     await LoginFormValidationSchema.validateSyncAt(field, { [field]: value });
   },
 };
-const initialFormValues: User = { user: "", password: "" };
+const initialFormValues: User = { username: "", password: "" };
 
 export default function InnerLoginForm() {
   const [form] = Form.useForm();
 
-  const submitHandler = (values: User) => {
+  const submitHandler = async (values: User) => {
     alert(JSON.stringify(values));
     // form.setFieldValue("user", "test");
     // if (values.user === "esfahani") {
     //   form.setFields([{ name: "user", errors: ["invalid mmmm"] }]);
     // }
+    console.log(values);
+    const res = await callApi().post("/auth/login", values);
+    if (res?.data?.status === 401) {
+      console.log("errorrrrrrrrr");
+    } else {
+      console.log(res?.data?.data);
+      form.resetFields();
+    }
   };
 
   return (
@@ -37,7 +47,7 @@ export default function InnerLoginForm() {
       onFinish={submitHandler}
       autoComplete="off"
     >
-      <Form.Item label="نام کاربری" name="user" rules={[yupSync]}>
+      <Form.Item label="نام کاربری" name="username" rules={[yupSync]}>
         <Input />
       </Form.Item>
 

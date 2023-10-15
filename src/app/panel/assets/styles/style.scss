@@ -1,0 +1,36 @@
+.panel-layout {
+    min-height: 100vh !important;
+    &--sider {
+        .logo-container {
+            a {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 5px 10px;
+                &::before {
+                    display: block;
+                    content: "";
+                    width: 50px;
+                    height: 50px;
+                    background-image: url("../../../../assets/images/logo.png");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: contain;
+                }
+            }
+        }
+        .ant-layout-sider-trigger {
+            .anticon-left {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+            .anticon-right {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+}
