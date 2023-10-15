@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Layout, Menu, MenuProps, theme } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import "./assets/styles/style.scss";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -23,9 +25,9 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("گزارشات", "sub1", <FileTextOutlined />, [
-    getItem("افزودن", "1"),
-    getItem("ورودی ها", "2"),
+  getItem("گزارشات", "/panel", <FileTextOutlined />, [
+    getItem("افزودن", "/reports/add"),
+    getItem("ورودی ها", "/reports"),
   ]),
 ];
 
@@ -34,10 +36,15 @@ export default function PanelLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const onClick: MenuProps["onClick"] = (e) => {
+    console.log("click", e);
+    router.push(e.keyPath[1] + e.key);
+  };
   return (
     <Layout hasSider className="panel-layout">
       <Sider
@@ -47,9 +54,14 @@ export default function PanelLayout({
         className="panel-layout--sider"
       >
         <div className="logo-container mb-3">
-          <a href=""></a>
+          <Link href="/panel"></Link>
         </div>
-        <Menu theme="dark" defaultSelectedKeys={["1"]} items={items} />
+        <Menu
+          onClick={onClick}
+          theme="dark"
+          defaultSelectedKeys={["1"]}
+          items={items}
+        />
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }} />

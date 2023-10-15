@@ -7,10 +7,10 @@ import StyledComponentsRegistry from "@/lib/antdRegistery";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "پرتال گزارشات",
-  description: "توسعه داده شده توسط گروه انتخاب",
-};
+// export const metadata: Metadata = {
+//   title: "پرتال گزارشات",
+//   description: "توسعه داده شده توسط گروه انتخاب",
+// };
 
 export default function RootLayout({
   children,
