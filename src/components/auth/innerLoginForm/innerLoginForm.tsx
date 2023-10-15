@@ -25,13 +25,6 @@ export default function InnerLoginForm() {
   const [form] = Form.useForm();
 
   const submitHandler = async (values: User) => {
-    alert(JSON.stringify(values));
-    // form.setFieldValue("user", "test");
-    // if (values.user === "esfahani") {
-    //   form.setFields([{ name: "user", errors: ["invalid mmmm"] }]);
-    // }
-    console.log(values);
-
     try {
       const res = await callApi().post("/auth/login", values);
       if (res?.data?.status === 401) {
@@ -58,7 +51,6 @@ export default function InnerLoginForm() {
       wrapperCol={{ span: 16 }}
       initialValues={initialFormValues}
       onFinish={submitHandler}
-      autoComplete="off"
     >
       <Form.Item label="نام کاربری" name="username" rules={[yupSync]}>
         <Input />

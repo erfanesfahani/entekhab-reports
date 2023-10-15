@@ -1,12 +1,22 @@
 import useSWR from "swr";
-import callApi from "../helpers/callApi";
 
-const useAuth = () => {
-  const { data, error, mutate } = useSWR("get_user", () => {
-    return callApi().get("/user");
+export default function useAuth() {
+  const { data, mutate, error } = useSWR("api_user", async () => {
+    if (document.cookie.includes("entekhabToken")) {
+      return true;
+    }
+    const error: any = new Error("Not authorized!");
+    error.status = 403;
+    throw error;
   });
 
-  return { user: data?.data?.user, error, loading: !data && !error, mutate };
-};
+  const loading = !data && !error;
+  const loggedOut = error && error.status === 403;
 
-export default useAuth;
+  return {
+    loading,
+    loggedOut,
+    user: data,
+    mutate,
+  };
+}

@@ -1,10 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Layout, Menu, MenuProps, theme } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import "./assets/styles/style.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
+import { removeLoginToken } from "@/helpers/auth";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -42,9 +44,22 @@ export default function PanelLayout({
     token: { colorBgContainer },
   } = theme.useToken();
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click", e);
+    // console.log("click", e);
     router.push(e.keyPath[1] + e.key);
   };
+  const { user, loading, loggedOut, mutate } = useAuth();
+
+  const logoutHandler = async () => {
+    removeLoginToken();
+    await mutate();
+  };
+  if (loggedOut) {
+    router.push("/auth/login");
+    mutate(undefined);
+    return <></>;
+  }
+  if (loading) return <>redirecting...</>;
+
   return (
     <Layout hasSider className="panel-layout">
       <Sider
@@ -64,7 +79,22 @@ export default function PanelLayout({
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Header
+          style={{ padding: 0, background: colorBgContainer }}
+          className="d-flex justify-content-end px-4"
+        >
+          <div>
+            <a
+              onClick={() => {
+                logoutHandler();
+              }}
+              href=""
+              className="text-decoration-none"
+            >
+              خروج
+            </a>
+          </div>
+        </Header>
         <Content style={{ margin: "30px" }}>
           <div
             style={{
