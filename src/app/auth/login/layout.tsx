@@ -18,7 +18,7 @@ export default function LoginLayout({
   const router = useRouter();
   const { user, mutate, loggedOut, loading } = useAuth();
   if (user) {
-    router.push("/panel");
+    router.push("/panel/reports");
     return <></>;
   }
   if (loading) return <>redirecting...</>;

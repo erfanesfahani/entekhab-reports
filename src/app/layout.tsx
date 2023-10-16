@@ -1,5 +1,3 @@
-"use client";
-
 import "../assets/styles/main.scss";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -9,10 +7,10 @@ import StyledComponentsRegistry from "@/lib/antdRegistery";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "پرتال گزارشات",
-//   description: "توسعه داده شده توسط گروه انتخاب",
-// };
+export const metadata: Metadata = {
+  title: "پرتال گزارشات",
+  description: "توسعه داده شده توسط گروه انتخاب",
+};
 
 export default function RootLayout({
   children,

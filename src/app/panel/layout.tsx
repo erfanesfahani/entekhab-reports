@@ -50,7 +50,7 @@ export default function PanelLayout({
   const { user, loading, loggedOut, mutate } = useAuth();
 
   const logoutHandler = async () => {
-    removeLoginToken();
+    await removeLoginToken();
     await mutate();
   };
   if (loggedOut) {
@@ -85,7 +85,8 @@ export default function PanelLayout({
         >
           <div>
             <a
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 logoutHandler();
               }}
               href=""

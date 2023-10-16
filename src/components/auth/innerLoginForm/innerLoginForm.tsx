@@ -5,7 +5,6 @@ import { Button, Form, Input } from "antd";
 import User from "@/models/user";
 import "./styles.scss";
 import callApi from "@/helpers/callApi";
-import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { storeLoginToken } from "@/helpers/auth";
 
@@ -21,7 +20,6 @@ const yupSync = {
 const initialFormValues: User = { username: "", password: "" };
 
 export default function InnerLoginForm() {
-  const router = useRouter();
   const [form] = Form.useForm();
 
   const submitHandler = async (values: User) => {
@@ -30,10 +28,8 @@ export default function InnerLoginForm() {
       if (res?.data?.status === 401) {
         console.log("نام کاربری یا گذر واژه صحیح نمی باشد");
       }
-      console.log(res.data?.data?.token);
       if (res.data.data.id) {
         await storeLoginToken(res.data?.data?.token);
-        router.push("/panel/reports");
       }
     } catch (error) {
       if (error instanceof AxiosError) {

@@ -1,16 +1,21 @@
 import { Space } from "antd";
 import "./styles.scss";
+import { ReactNode } from "react";
 
 interface Props {
   title: string;
   subTitle?: string;
+  children?: ReactNode;
 }
 
-export default function PageHeader({ title, subTitle }: Props) {
+export default function PageHeader({ title, subTitle, children }: Props) {
   return (
     <div className="page-header">
-      <h1>{title}</h1>
-      <h2>{subTitle}</h2>
+      <div className="page-header--right">
+        <h1>{title}</h1>
+        <h2>{subTitle}</h2>
+      </div>
+      {children && <div className="page-header--left">{children}</div>}
     </div>
   );
 }
