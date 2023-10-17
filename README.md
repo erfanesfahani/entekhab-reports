@@ -18,10 +18,10 @@ Used Items :
 
 Need to be better:
 
-*Responsive UI
-*Data Fetching Structure
-*Some UI Improvements
-*Enhance date and time related things to use in jalali case
+* Responsive UI
+* Data Fetching Structure
+* Some UI Improvements
+* Enhance date and time related things to use in jalali case
 
-I hope you enjoy to use this minkin app
+I hope you enjoy to use this minkin app 
 @erfanesfahani
