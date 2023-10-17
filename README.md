@@ -11,10 +11,10 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 Used Items :
 
-*Nextjs 13.5
-*TypeScript 
-*SWR
-*Ant Design
+* Nextjs 13.5
+* TypeScript 
+* SWR
+* Ant Design
 
 Need to be better:
 
