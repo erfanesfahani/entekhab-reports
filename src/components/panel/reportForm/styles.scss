@@ -1,18 +1,32 @@
-// .login-form {
-//     text-align: center;
-//     .ant-form-item {
-//         .ant-row {
-//             margin-bottom: 30px;
-//             .ant-col {
-//                 &.ant-form-item-control {
-//                     .ant-form-item-control-input {
-//                     }
-//                 }
-//                 &.ant-form-item-label {
-//                     width: 100%;
-//                     text-align: right;
-//                 }
-//             }
-//         }
-//     }
-// }
+.report-form {
+    .date-picker-item {
+        .rmdp-container {
+            .ant-input {
+                width: 145px;
+                box-sizing: border-box;
+                margin: 0;
+                padding: 3px 11px 3px;
+                color: rgba(0, 0, 0, 0.88);
+                font-size: 16px;
+                line-height: 1;
+                list-style: none;
+                font-family: Shabnam;
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                background: #ffffff;
+                border: 1px solid #d9d9d9;
+                border-radius: 6px;
+                transition:
+                    border 0.2s,
+                    box-shadow 0.2s;
+                &:hover,
+                &:focus {
+                    outline: 0;
+                    border-color: #2f71a3 !important;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+}

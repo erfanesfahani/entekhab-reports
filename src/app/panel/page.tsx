@@ -1,7 +1,7 @@
 "use client";
 
 import PageHeader from "@/components/panel/pageHeader/pageHeader";
-import { Space, Skeleton } from "antd";
+import { Skeleton } from "antd";
 
 export default function Panel() {
   return (

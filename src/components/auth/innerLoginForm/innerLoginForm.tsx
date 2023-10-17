@@ -1,12 +1,14 @@
 "use client";
 
-import * as yup from "yup";
-import { Button, Form, Input } from "antd";
-import User from "@/models/user";
-import "./styles.scss";
 import callApi from "@/helpers/callApi";
 import { AxiosError } from "axios";
 import { storeLoginToken } from "@/helpers/auth";
+import { useRouter } from "next/navigation";
+import User from "@/models/user";
+import * as yup from "yup";
+import { Button, Form, Input } from "antd";
+import { useToasts } from "react-toast-notifications";
+import "./styles.scss";
 
 const LoginFormValidationSchema = yup.object().shape({
   username: yup.string().required("وارد کردن نام کاربری الزامی است"),
@@ -21,19 +23,29 @@ const initialFormValues: User = { username: "", password: "" };
 
 export default function InnerLoginForm() {
   const [form] = Form.useForm();
+  const { addToast } = useToasts();
+  const router = useRouter();
 
   const submitHandler = async (values: User) => {
     try {
       const res = await callApi().post("/auth/login", values);
       if (res?.data?.status === 401) {
-        console.log("نام کاربری یا گذر واژه صحیح نمی باشد");
+        addToast("نام کاربری یا گذر واژه صحیح نمی باشد", {
+          appearance: "error",
+        });
       }
       if (res.data.data.id) {
         await storeLoginToken(res.data?.data?.token);
+        router.push("/panel/reports");
+        await addToast("ورود با موفقیت انجام شد", {
+          appearance: "success",
+        });
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log("خطا در برقراری ارتباط");
+        await addToast("خطا در برقراری ارتباط با سرور", {
+          appearance: "error",
+        });
       }
     }
   };

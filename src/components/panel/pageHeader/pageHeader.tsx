@@ -1,6 +1,5 @@
-import { Space } from "antd";
-import "./styles.scss";
 import { ReactNode } from "react";
+import "./styles.scss";
 
 interface Props {
   title: string;

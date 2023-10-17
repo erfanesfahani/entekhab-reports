@@ -12,9 +12,9 @@ export async function CreateReport(values: Report) {
   );
 }
 
-export async function UpdateReport(reportId: number, values: Report) {
+export async function UpdateReport(reportId: string, values: Report) {
   return await callApi().put(
-    "/reports" + reportId,
+    "/reports/" + reportId,
     {
       ...values,
     },

@@ -1,10 +1,7 @@
-const Loading = () => {
-  // if(! user?.is_admin ) {
-  //     router.push('/')
-  //     return <></>;
-  // }
+import BarSpinner from "@/components/shared/barSpinner/barSpinner";
 
-  return <>Loadingggggggggggggggggggggggggg ....</>;
+const Loading = () => {
+  return <BarSpinner />;
 };
 
 export default Loading;

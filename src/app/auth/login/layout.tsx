@@ -1,14 +1,9 @@
 "use client";
 
-// import type { Metadata } from "next";
+import BarSpinner from "@/components/shared/barSpinner/barSpinner";
 import "./assets/styles/style.scss";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-
-// export const metadata: Metadata = {
-//   title: "ورود اعضا",
-//   description: "توسعه داده شده توسط گروه انتخاب",
-// };
 
 export default function LoginLayout({
   children,
@@ -21,6 +16,6 @@ export default function LoginLayout({
     router.push("/panel/reports");
     return <></>;
   }
-  if (loading) return <>redirecting...</>;
+  if (loading) return <BarSpinner />;
   return <div className="login-page">{children}</div>;
 }

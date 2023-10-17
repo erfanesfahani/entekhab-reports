@@ -7,6 +7,9 @@ import { useState } from "react";
 import { ColumnsType } from "antd/es/table";
 import { Space } from "antd";
 import DeleteConfirmationModal from "@/components/shared/deleteConfirmationModal/deleteConfirmationModal";
+import { dateToJalali } from "@/hooks/getDate";
+import Link from "next/link";
+import { useToasts } from "react-toast-notifications";
 
 interface Props {}
 
@@ -16,6 +19,7 @@ export default function ReportTable({}: Props) {
       .get("/reports", setConfigHeader())
       .then((res) => res.data);
   const { data, error, mutate } = useSWR("/reports", GetReportsData);
+  const { addToast } = useToasts();
 
   const columns: ColumnsType<object> = [
     {
@@ -33,18 +37,31 @@ export default function ReportTable({}: Props) {
       title: "زمان",
       dataIndex: "time",
       key: "time",
+      render: (text) => <span>{text}</span>,
     },
     {
       title: "تاریخ",
-      dataIndex: "time",
-      key: "time",
+      dataIndex: "date",
+      key: "date",
+      render: (text) => <span>{dateToJalali(text)}</span>,
     },
     {
       title: "",
       key: "action",
       render: (text, _, record) => (
         <Space size="middle">
-          <a onClick={() => showModal(text.id)}>حذف</a>
+          <Link
+            className="text-decoration-none"
+            href={`/panel/reports/${text.id}/edit`}
+          >
+            ویرایش
+          </Link>
+          <a
+            className="text-danger text-decoration-none"
+            onClick={() => showModal(text.id)}
+          >
+            حذف
+          </a>
         </Space>
       ),
     },
@@ -64,15 +81,16 @@ export default function ReportTable({}: Props) {
       await DeleteReport(DeletableItem);
       await mutate();
       setOpen(false);
-      setOpen(false);
+      addToast("آیتم مورد نظر با موفقیت حذف شد", {
+        appearance: "success",
+      });
       setConfirmLoading(false);
-    }, 2000);
+    }, 1000);
   };
 
   const handleCancel = () => {
     setOpen(false);
   };
-  console.log("swr data", data);
 
   return (
     <div className="report-table my-4">

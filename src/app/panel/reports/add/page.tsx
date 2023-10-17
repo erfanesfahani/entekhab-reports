@@ -1,13 +1,13 @@
 "use client";
 
-import PageHeader from "@/components/panel/pageHeader/pageHeader";
 import ReportForm from "@/components/panel/reportForm/reportForm";
+import PageHeader from "@/components/panel/pageHeader/pageHeader";
 
 export default function AddReport() {
   return (
     <div>
       <PageHeader title="ایجاد گزارش" />
-      <ReportForm />
+      <ReportForm method="add" />
     </div>
   );
 }

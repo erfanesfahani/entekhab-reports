@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Layout, Menu, MenuProps, theme } from "antd";
 import { FileTextOutlined } from "@ant-design/icons";
 import "./assets/styles/style.scss";
@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
 import { removeLoginToken } from "@/helpers/auth";
+import BarSpinner from "@/components/shared/barSpinner/barSpinner";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -43,8 +44,8 @@ export default function PanelLayout({
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
   const onClick: MenuProps["onClick"] = (e) => {
-    // console.log("click", e);
     router.push(e.keyPath[1] + e.key);
   };
   const { user, loading, loggedOut, mutate } = useAuth();
@@ -58,7 +59,7 @@ export default function PanelLayout({
     mutate(undefined);
     return <></>;
   }
-  if (loading) return <>redirecting...</>;
+  if (loading) return <BarSpinner />;
 
   return (
     <Layout hasSider className="panel-layout">

@@ -15,7 +15,6 @@ export default function Reports() {
           ایجاد گزارش
         </Link>
       </PageHeader>
-      {/* {JSON.stringify(res)} */}
       <ReportTable />
     </div>
   );
